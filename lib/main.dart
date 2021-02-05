@@ -48,6 +48,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  int currentTabIndex = 0;
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -56,6 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+    });
+  }
+
+  void onTapped(int i) {
+    setState(() {
+      currentTabIndex = i;
     });
   }
 
@@ -108,6 +116,29 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTapped,
+        currentIndex: currentTabIndex,
+        selectedItemColor: Color(0xff191919),
+        unselectedItemColor: Color(0xffa0a0a0),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(currentTabIndex == 0 ? Icons.home : Icons.home_outlined),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(currentTabIndex == 1
+                ? Icons.insert_chart
+                : Icons.insert_chart_outlined),
+            label: "Records",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+                currentTabIndex == 2 ? Icons.person : Icons.person_outline),
+            label: "Profile",
+          ),
+        ],
+      ),
     );
   }
 }
