@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
+import "./tab_home.dart";
+import "./tab_records.dart";
+import "./tab_profile.dart";
 
 void main() {
   runApp(MyApp());
@@ -28,6 +31,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentTabIndex = 0;
+  List<Widget> tabs = [
+    HomeTab(),
+    RecordsTab(),
+    ProfileTab(),
+  ];
 
   void onTapped(int i) {
     setState(() {
@@ -41,9 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Text("Hello World!"),
-      ),
+      body: tabs[currentTabIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTapped,
         currentIndex: currentTabIndex,
